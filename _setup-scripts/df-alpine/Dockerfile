@@ -30,6 +30,9 @@ RUN echo "Installing packages..." \
       util-linux \
       zsh
 
+# Set shell to zsh
+SHELL ["zsh", "-c"]
+
 # Fix locale issues, e.g. with Perl
 #RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
 # && dpkg-reconfigure --frontend=noninteractive locales \
@@ -76,7 +79,7 @@ RUN mkdir -p $HOME/.tmux/scripts \
 RUN rm -rf .dotfiles
 
 # Last setup
-RUN ["zsh", "-c", "source ~/.zshrc"]
+RUN source ~/.zshrc
 ENV OS_NAME=alpine
 
 # Set default entrypoint and command
