@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM alpine
 
 # Configure home, user, and working dir
 ARG NAME=codespace
@@ -12,30 +12,30 @@ WORKDIR $HOME/$NAME
 #USER $NAME
 
 # Install remaining packages
-ARG DEBIAN_FRONTEND=noninteractive
+#ARG DEBIAN_FRONTEND=noninteractive
 RUN echo "Installing packages..." \
  && set -ex \
- && apt-get update \
- && apt-get install -y --no-install-recommends \
+ && apk add --no-cache --virtual .build-deps \
+      bash \
+ && apk add --no-cache \
       ca-certificates \
+      coreutils \
       curl \
-      fd-find \
+      fd \
       git \
-      locales \
+      ncurses \
       neovim \
-      rename \
       ripgrep \
       tmux \
       tree \
-      zsh \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+      util-linux \
+      zsh
 
 # Fix locale issues, e.g. with Perl
-RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
- && dpkg-reconfigure --frontend=noninteractive locales \
- && update-locale LANG=en_US.UTF-8
-ENV LANG=en_US.UTF-8 
+#RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
+# && dpkg-reconfigure --frontend=noninteractive locales \
+# && update-locale LANG=en_US.UTF-8
+#ENV LANG=en_US.UTF-8 
 
 # Clone dotfiles from public repo
 RUN git clone https://github.com/tw-space/dotfiles .dotfiles
@@ -75,6 +75,11 @@ RUN mkdir -p $HOME/.tmux/scripts \
 
 # Cleanup
 RUN rm -rf .dotfiles
+RUN apk del .build-deps
+
+# Last setup
+RUN ["zsh", "-c", "source ~/.zshrc"]
+ENV OS_NAME=alpine
 
 # Set default entrypoint and command
 ENTRYPOINT ["zsh", "-c"]
