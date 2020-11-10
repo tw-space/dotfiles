@@ -12,7 +12,6 @@ export OS_NAME=alpine
 # Configure home, user, and working dir
 export HOME=/home
 export CODESPACE=codespace
-mkdir $HOME/$CODESPACE
 
 # Install packages
 echo "Installing packages..." \
@@ -73,5 +72,6 @@ mkdir -p $HOME/.tmux/scripts \
 rm -rf $HOME/.dotfiles
 
 # Start zsh in codespace
+mkdir $HOME/$CODESPACE
 cd $HOME/$CODESPACE
 zsh
