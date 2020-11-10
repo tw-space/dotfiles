@@ -15,9 +15,8 @@ WORKDIR $HOME/$NAME
 #ARG DEBIAN_FRONTEND=noninteractive
 RUN echo "Installing packages..." \
  && set -ex \
- && apk add --no-cache --virtual .build-deps \
-      bash \
  && apk add --no-cache \
+      bash \
       ca-certificates \
       coreutils \
       curl \
@@ -75,7 +74,6 @@ RUN mkdir -p $HOME/.tmux/scripts \
 
 # Cleanup
 RUN rm -rf .dotfiles
-RUN apk del .build-deps
 
 # Last setup
 RUN ["zsh", "-c", "source ~/.zshrc"]
