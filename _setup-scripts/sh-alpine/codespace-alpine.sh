@@ -45,7 +45,7 @@ git clone https://github.com/jocelynmallon/zshmarks $ZSH/custom/plugins/zshmarks
 
 # Install fzf from git
 git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
-$HOME/.fzf/install --all
+$HOME/.fzf/install --all || true
 rm -f $HOME/.bashrc $HOME/.fzf.bash
 
 # Configure neovim
