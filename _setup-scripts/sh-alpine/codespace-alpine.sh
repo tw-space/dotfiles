@@ -1,8 +1,12 @@
 #!/bin/sh
 ###############################################################################
 # 
-#     Run script with "dot space syntax":
+#     Run script with "dot space syntax" when local:
 #     $ . /path/to/codespace-alpine.sh
+#
+#     Or from github, install better wget, then run with wget:
+#     $ apk add --no-cache wget
+#     $ sh -c "$(wget https://raw.github.com/...sh -O -)"
 #
 ###############################################################################
 
