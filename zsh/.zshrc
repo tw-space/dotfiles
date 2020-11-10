@@ -166,8 +166,13 @@ echo -e '\033[6 q'
 
 #   fzf configuration
 #   ------------------------------------------
-    export FZF_DEFAULT_COMMAND="fdfind --hidden --type f --exclude node_modules --exclude .git"
-    export FZF_ALT_C_COMMAND="fdfind --hidden --type d . $HOME"
+    if [[ $OS_NAME == "ubuntu" ]]; then
+      export FZF_DEFAULT_COMMAND="fdfind --hidden --type f --exclude node_modules --exclude .git"
+      export FZF_ALT_C_COMMAND="fdfind --hidden --type d . $HOME"
+    else
+      export FZF_DEFAULT_COMMAND="fd --hidden --type f --exclude node_modules --exclude .git"
+      export FZF_ALT_C_COMMAND="fd --hidden --type d . $HOME"
+    fi
     export FZF_DEFAULT_OPTS='--height 60% --layout=reverse --border'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     
