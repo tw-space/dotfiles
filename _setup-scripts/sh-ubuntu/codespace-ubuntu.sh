@@ -28,6 +28,7 @@ echo "Installing packages..." \
       curl \
       fd-find \
       git \
+      locales \
       ncurses-base \
       neovim \
       ripgrep \
