@@ -26,9 +26,9 @@ echo "Installing packages..." \
       ca-certificates \
       coreutils \
       curl \
-      fd \
+      fdfind \
       git \
-      ncurses \
+      ncurses-base \
       neovim \
       ripgrep \
       tmux \
