@@ -2,15 +2,16 @@
 ###############################################################################
 # 
 #     Run script with "dot space syntax" when local:
-#     $ . /path/to/codespace-alpine.sh
+#     $ . /path/to/codespace-ubuntu.sh
 #
 #     Or from github, install better wget, then run with wget:
-#     $ apk add --no-cache wget
+#     $ apt-get update && \
+#       apt-get install -y --no-install-recommends wget
 #     $ sh -c "$(wget https://raw.github.com/...sh -O -)"
 #
 ###############################################################################
 
-# setup on alpine
+# setup on ubuntu
 export OS_NAME=ubuntu
 
 # Configure home, user, and working dir
