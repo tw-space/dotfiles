@@ -26,7 +26,7 @@ echo "Installing packages..." \
       ca-certificates \
       coreutils \
       curl \
-      fdfind \
+      fd-find \
       git \
       ncurses-base \
       neovim \
