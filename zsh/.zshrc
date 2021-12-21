@@ -137,7 +137,8 @@ echo -e '\033[6 q'
    #alias tmux="TERM=screen-256color-bce tmux"
     alias tm="tmux ls"
     alias tmuxname='tmux display-message -p "#S"'
-    alias tma="tmux attach -t"
+    alias tmat="tmux attach -t"
+    alias tmac="tmux attach -t codespace"
     alias tmns="~/.tmux/scripts/new-tmux-session-window-panes.zsh"
     alias tmnw="~/.tmux/scripts/new-tmux-window-panes.zsh"
     alias tmnp="~/.tmux/scripts/new-tmux-panes.zsh"

@@ -40,6 +40,7 @@ echo "Installing packages..." \
  && yum install -y \
       autoconf \
       automake \
+      byacc \
       gcc \
       git \
       libevent-devel \
@@ -103,7 +104,9 @@ nvim --headless +PlugInstall +qall
 git clone https://github.com/tmux/tmux.git $HOME/tmux \
  && cd $HOME/tmux \
  && sh autogen.sh \
- && ./configure && make && make install \
+ && ./configure \
+ && make \
+ && make install \
  && cd $HOME \
  && rm -rf $HOME/tmux
 cp $HOME/.dotfiles/tmux/.tmux.conf $HOME/
