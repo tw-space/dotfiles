@@ -1,10 +1,8 @@
 #!/bin/sh
 ###############################################################################
 # 
-#     Run as root:
-#
 #     Run script with "dot space syntax" when local:
-#     $ . /path/to/codespace-amazonlinux.sh
+#     $ . /path/to/codespace-amzn.sh
 #
 #     Or from github, install better wget, then run with wget:
 #     $ yum update && \
@@ -13,29 +11,39 @@
 #
 ###############################################################################
 
+# send stdout and stderr to logs file
+exec >> /setup_script_logs
+exec 2>&1
+
+# echo every command
+set -x
+
 # setup on Amazon Linux 2
-export OS_NAME=amazonlinux
+export OS_NAME=amzn
 
 # Configure home, user, and working dir
-export HOME=/home
+export ZUSER=ec2-user
+adduser $ZUSER      # fails if exists
+export HOME=/home/$ZUSER
 export CODESPACE=codespace
+
+# stop script when first command fails
+set -e
 
 # Install packages
 echo "Installing packages..." \
- && set -ex \
- && yum update \
+ && yum update -y \
  && amazon-linux-extras install epel -y \
- && yum install \
-     #fd-find \
+ && yum-config-manager -y --add-repo=https://copr.fedorainfracloud.org/coprs/carlwgeorge/ripgrep/repo/epel-7/carlwgeorge-ripgrep-epel-7.repo \
+ && yum install -y \
       git \
-     #locales \
-     #neovim \
-     #ripgrep \
+      neovim \
+      ripgrep \
       tmux \
       tree \
       zsh \
- && yum clean all \
- && rm -rf /var/lib/apt/lists/*
+ && yum clean all -y \
+ && rm -rf /var/cache/yum
 
 # Fix locale issues, e.g. with Perl
 # sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
@@ -50,7 +58,7 @@ git clone https://github.com/tw-space/dotfiles $HOME/.dotfiles
 export ZSH=$HOME/.oh-my-zsh
 export SHELL=/bin/zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-cp $HOME/.dotfiles/zsh/.zshrc $HOME/
+\cp -f $HOME/.dotfiles/zsh/.zshrc $HOME/
 cp $HOME/.dotfiles/zsh/codespace*.zsh-theme $ZSH/themes/
 git clone https://github.com/jocelynmallon/zshmarks $ZSH/custom/plugins/zshmarks
 
@@ -80,8 +88,14 @@ tmux start-server \
 mkdir -p $HOME/.tmux/scripts \
  && cp -r $HOME/.dotfiles/tmux/scripts $HOME/.tmux/
 
+# Set default shell for user
+usermod --shell /bin/zsh $ZUSER
+
+# Give user their stuff
+chown -R $ZUSER $HOME
+
 # Cleanup
-rm -rf $HOME/.dotfiles
+#rm -rf $HOME/.dotfiles
 
 # Start zsh in codespace
 mkdir $HOME/$CODESPACE
