@@ -138,7 +138,7 @@ echo -e '\033[6 q'
     alias tm="tmux ls"
     alias tmuxname='tmux display-message -p "#S"'
     alias tmat="tmux attach -t"
-    alias tmac="tmux attach -t codespace"
+    alias tmac="tmux new -s codespace || tmux attach -t codespace"
     alias tmns="~/.tmux/scripts/new-tmux-session-window-panes.zsh"
     alias tmnw="~/.tmux/scripts/new-tmux-window-panes.zsh"
     alias tmnp="~/.tmux/scripts/new-tmux-panes.zsh"
