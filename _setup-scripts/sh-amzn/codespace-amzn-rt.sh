@@ -38,10 +38,14 @@ echo "Installing packages..." \
  && amazon-linux-extras install epel -y \
  && yum-config-manager -y --add-repo=https://copr.fedorainfracloud.org/coprs/carlwgeorge/ripgrep/repo/epel-7/carlwgeorge-ripgrep-epel-7.repo \
  && yum install -y \
+      autoconf \
+      automake \
+      gcc \
       git \
+      libevent-devel \
+      ncurses-devel \
       neovim \
       ripgrep \
-      tmux \
       tree \
       zsh \
  && yum clean all -y \
@@ -95,7 +99,13 @@ mkdir -p $RHOME/.config/nvim/colors \
  && cp $HOME/.dotfiles/neovim/dracula.vim $RHOME/.config/nvim/colors/
 nvim --headless +PlugInstall +qall
 
-# Configure tmux
+# Install and configure tmux
+git clone https://github.com/tmux/tmux.git $HOME/tmux \
+ && cd $HOME/tmux \
+ && sh autogen.sh \
+ && ./configure && make && make install \
+ && cd $HOME \
+ && rm -rf $HOME/tmux
 cp $HOME/.dotfiles/tmux/.tmux.conf $HOME/
 cp $HOME/.dotfiles/tmux/.tmux.conf $RHOME/
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
@@ -118,7 +128,8 @@ usermod --shell /bin/zsh $RUSER
 chown -R $ZUSER $HOME
 
 # Cleanup
-#rm -rf $HOME/.dotfiles
+rm -rf $HOME/.dotfiles
+rm -rf $HOME/tmux
 
 # Start zsh in codespace
 mkdir $HOME/$CODESPACE
