@@ -5,7 +5,7 @@
 ################################################################
 
 # Path to your oh-my-zsh installation
-export ZSH="/home/.oh-my-zsh"
+export ZSH=$HOME/.oh-my-zsh
 
 # Set zsh variables
 # ------------------------------------------------------------
@@ -74,7 +74,7 @@ echo -e '\033[6 q'
 
 #   Export environment variables
 #   -----------------------------------------------------------
-    export CODESPACE='/home/codespace'
+    export CODESPACE=$HOME/codespace
     export LC_ALL=en_US.UTF-8
     export LANG=en_US.UTF-8
     export LANGUAGE=en_US.UTF-8
