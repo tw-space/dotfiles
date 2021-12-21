@@ -134,7 +134,7 @@ echo -e '\033[6 q'
     alias gm="jump"                             # zshmarks plugin
     alias dm="deletemark"                       # zshmarks plugin
     alias sm="showmarks"                        # zshmarks plugin
-    alias tmux="TERM=screen-256color-bce tmux"
+   #alias tmux="TERM=screen-256color-bce tmux"
     alias tm="tmux ls"
     alias tmuxname='tmux display-message -p "#S"'
     alias tma="tmux attach -t"
