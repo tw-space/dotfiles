@@ -61,10 +61,13 @@ export ZSH=$HOME/.oh-my-zsh
 export RZSH=$RHOME/.oh-my-zsh
 export SHELL=/bin/zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+cp -r $ZSH $RZSH
 \cp -f $HOME/.dotfiles/zsh/.zshrc $HOME/
 \cp -f $HOME/.dotfiles/zsh/.zshrc $RHOME/
-cp $HOME/.dotfiles/zsh/codespace*.zsh-theme $ZSH/themes/
-cp $HOME/.dotfiles/zsh/codespace*.zsh-theme $RZSH/themes/
+cp $HOME/.dotfiles/zsh/codespace.zsh-theme $ZSH/themes/
+cp $HOME/.dotfiles/zsh/codespace256.zsh-theme $ZSH/themes/
+cp $HOME/.dotfiles/zsh/codespace-rt.zsh-theme $RZSH/themes/
+cp $HOME/.dotfiles/zsh/codespace256-rt.zsh-theme $RZSH/themes/
 git clone https://github.com/jocelynmallon/zshmarks $ZSH/custom/plugins/zshmarks
 cp -r $ZSH/custom/plugins/zshmarks $RZSH/custom/plugins/zshmarks
 
@@ -72,7 +75,7 @@ cp -r $ZSH/custom/plugins/zshmarks $RZSH/custom/plugins/zshmarks
 git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
 cp -r $HOME/.fzf $RHOME/.fzf
 $HOME/.fzf/install --all || true
-rm -f $HOME/.bashrc $HOME/.fzf.bash
+rm -f $HOME/.bashrc $HOME/.fzf/code.bash
 rm -f $RHOME/.bashrc $RHOME/.fzf.bash
 
 # Configure neovim
@@ -96,7 +99,7 @@ nvim --headless +PlugInstall +qall
 cp $HOME/.dotfiles/tmux/.tmux.conf $HOME/
 cp $HOME/.dotfiles/tmux/.tmux.conf $RHOME/
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-cp -r $HOME/.tmux/plugins/tpm $RHOME/.tmux/plugins/tpm
+cp -r $HOME/.tmux $RHOME/.tmux
 tmux start-server \
  && tmux new-session -d \
  && sleep 1 \

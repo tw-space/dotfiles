@@ -9,7 +9,11 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Set zsh variables
 # ------------------------------------------------------------
-ZSH_THEME="codespace256"
+if [[ $USER == 'root' ]]; then
+  ZSH_THEME="codespace256-rt"
+else
+  ZSH_THEME="codespace256"
+fi
 DISABLE_AUTO_UPDATE="true"
 DISABLE_AUTO_TITLE="true"
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
