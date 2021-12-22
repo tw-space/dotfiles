@@ -75,6 +75,8 @@ echo -e '\033[6 q'
 #   ------------------------------------------------------------
     export PATH=$PATH:/usr/bin
     export PATH=$PATH:/usr/local/bin
+    export PATH=$PATH:/usr/sbin
+    export PATH=$PATH:/usr/local/sbin
     #export PATH=$PATH:$(yarn global bin)
     # typeset -aU path    # dedupes PATH ## PLACED AT END OF FILE
 

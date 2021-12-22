@@ -127,15 +127,16 @@ mkdir -p $RHOME/.tmux/scripts \
 usermod --shell /bin/zsh $ZUSER
 usermod --shell /bin/zsh $RUSER
 
-# Give user their stuff
-chown -R $ZUSER $HOME
-
 # Cleanup
 rm -rf $HOME/.dotfiles
 rm -rf $HOME/tmux
 
-# Start zsh in codespace
+# Make codespace
 mkdir $HOME/$CODESPACE
 mkdir $RHOME/$CODESPACE
+
+# Give user their stuff
+chown -R $ZUSER $HOME
+
 cd $HOME/$CODESPACE
 zsh
