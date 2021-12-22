@@ -135,8 +135,19 @@ rm -rf $HOME/tmux
 mkdir $HOME/$CODESPACE
 mkdir $RHOME/$CODESPACE
 
+# Write after setup steps
+cat << EOF > $HOME/$CODESPACE/README_After_Setup_Steps.md
+# After Setup Steps
+
+-   [ ] 1.  Add to \`/etc/sudoers\` via \`sudo visudo\`:
+
+        Defaults    secure_path += /usr/local/bin:/usr/local/sbin
+
+EOF
+
 # Give user their stuff
 chown -R $ZUSER $HOME
 
+# Start zsh in codespace
 cd $HOME/$CODESPACE
 zsh
