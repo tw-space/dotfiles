@@ -74,6 +74,8 @@ echo -e '\033[6 q'
 #   Set PATH
 #   ------------------------------------------------------------
     export PATH=$PATH:/usr/bin
+    export PATH=$PATH:/usr/local/bin
+    #export PATH=$PATH:$(yarn global bin)
     # typeset -aU path    # dedupes PATH ## PLACED AT END OF FILE
 
 #   Export environment variables
