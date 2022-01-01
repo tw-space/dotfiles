@@ -16,16 +16,6 @@ else
 fi
 DISABLE_AUTO_UPDATE="true"
 DISABLE_AUTO_TITLE="true"
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-# CASE_SENSITIVE="true"
-# HYPHEN_INSENSITIVE="true"
-# export UPDATE_ZSH_DAYS=13
-# DISABLE_LS_COLORS="true"
-# ENABLE_CORRECTION="true"
-# COMPLETION_WAITING_DOTS="true"
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-# HIST_STAMPS="mm/dd/yyyy"
-# ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -164,6 +154,8 @@ echo -e '\033[6 q'
 
 #   Personal Functions
 #   ------------------------------------------
+    altercd(){ cd(){ unset -f cd ; cd $*; ls ; altercd; } } ; altercd 
+    revertcd(){ cd(){ unset -f cd; cd $*; } }
     cl() { cd "$@" && ls; }
     cs() { cd "$@" && ls; }
     snap() { cp -r "$1" "$1"-`date +%Y-%m-%d-%H%M` }
