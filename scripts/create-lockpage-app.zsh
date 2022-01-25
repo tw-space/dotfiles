@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-set -ex
+set -e
 
 # Verify dependencies
 if [ ! -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
