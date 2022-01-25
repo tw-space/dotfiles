@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-set -e
+set -eu -o pipefail
 
 # Verify dependencies
 if [ ! -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
@@ -32,21 +32,19 @@ git init
 
 # Configure starter with project's name
 perl -i -pe"s/lockpage\-starter\-next/$NAME/g" package.json
-perl -i -pe"s/lockpage\-starter\-next/$NAME/g" appspec.yml
-perl -i -pe"s/lockpage\-starter\-next/$NAME/g" scripts/start_server.sh
-perl -i -pe"s/lockpage\-starter\-next/$NAME/g" scripts/populate_secrets.sh
-perl -i -pe"s/my\-app/$NAME/g" .env/common.env.js
-perl -i -pe"s/my\-app/$NAME/g" .env/RENAME_TO.secrets.js
-perl -i -pe"s/my\-app/$NAME/g" cdk/package.json
-rename "s/my\-app/$NAME/g" cdk/test/my-app-cdk.test.ts
-perl -i -pe"s/my\-app/$NAME/g" cdk/lib/my-app-cdk-stack.ts
-rename "s/my\-app/$NAME/g" cdk/lib/my-app-cdk-stack.ts
-perl -i -pe"s/my\-app/$NAME/g" cdk/bin/my-app-cdk.ts
-rename "s/my\-app/$NAME/g" cdk/bin/my-app-cdk.ts
-perl -i -pe"s/my\-app/$NAME/g" cdk/cdk.json
-
-# Success
-echo ""
-echo "Created new lockpage-full-stack-starter app $fg[green]$NAME$reset_color"
-echo ""
-echo "See $fg[green]README.md$reset_color for getting started"
+&& perl -i -pe"s/lockpage\-starter\-next/$NAME/g" appspec.yml\
+&& perl -i -pe"s/lockpage\-starter\-next/$NAME/g" scripts/start_server.sh\
+&& perl -i -pe"s/lockpage\-starter\-next/$NAME/g" scripts/populate_secrets.sh\
+&& perl -i -pe"s/my\-app/$NAME/g" .env/common.env.js\
+&& perl -i -pe"s/my\-app/$NAME/g" .env/RENAME_TO.secrets.js\
+&& perl -i -pe"s/my\-app/$NAME/g" cdk/package.json\
+&& rename "s/my\-app/$NAME/g" cdk/test/my-app-cdk.test.ts\
+&& perl -i -pe"s/my\-app/$NAME/g" cdk/lib/my-app-cdk-stack.ts\
+&& rename "s/my\-app/$NAME/g" cdk/lib/my-app-cdk-stack.ts\
+&& perl -i -pe"s/my\-app/$NAME/g" cdk/bin/my-app-cdk.ts\
+&& rename "s/my\-app/$NAME/g" cdk/bin/my-app-cdk.ts\
+&& perl -i -pe"s/my\-app/$NAME/g" cdk/cdk.json
+&& echo ""\
+&& echo "Created new lockpage-full-stack-starter app $fg[green]$NAME$reset_color"\
+&& echo ""\
+&& echo "See $fg[green]README.md$reset_color for getting started"
