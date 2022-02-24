@@ -140,6 +140,7 @@ echo -e '\033[6 q'
     alias rmhio='rm -f *.hi && rm -f *.o'       # haskell
     alias tree='tree -a -I node_modules --noreport'
     alias fd='fdfind --hidden'
+
 #   lr:  Full Recursive Directory Listing
     alias lr="ls -Rlp | awk '{ if (NF==1) print \$0; } { if (NF>2) print \$NF; } { if (NF==0) print \$0; }'"
 
@@ -158,7 +159,7 @@ echo -e '\033[6 q'
     revertcd(){ cd(){ unset -f cd; cd $*; } }
     cl() { cd "$@" && ls; }
     cs() { cd "$@" && ls; }
-    snap() { cp -r "$1" "$1"-`date +%Y-%m-%d-%H%M` }
+    snapfile() { cp -r "$1" "$1"-`date +%Y-%m-%d-%H%M` }
     snapdir() { cp -r "$1" "$1"-`date +%Y-%m-%d-%H%M` }
 
     # fh - search in your command history and execute selected command
