@@ -181,5 +181,11 @@ echo -e '\033[6 q'
     
     # Source key bindings etc
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#   source ec2 environment if exists
+#   ------------------------------------------
+    if [[ -f $HOME/.ec2env ]]; then
+      source $HOME/.ec2env
+    fi
     
 typeset -aU path    # dedupes path
